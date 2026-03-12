@@ -1,34 +1,32 @@
+import { Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout";
-import { account } from "../services/appwrite";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import Productos from "./Productos";
+import Stock from "./Stock";
+import Ventas from "./Ventas";
+import Reportes from "./Reportes";
+import Clientes from "./Clientes";
+import Usuarios from "./Usuarios";
+import Configuracion from "./Configuracion";
+import Notificaciones from "./Notificaciones";
+import DashboardHome from "./DashboardHome";
 
 export default function AdminDashboard() {
-  const navigate = useNavigate();
-
-  const logout = async () => {
-    try {
-      await account.deleteSession("current");
-      navigate("/"); // vuelve al login
-    } catch (error) {
-      console.error("Error en logout:", error);
-    }
-  };
+  const { logout } = useAuth();
 
   return (
     <Layout onLogout={logout}>
-     <div className="text-center lg:text-left">
-        {/* Logo */}
-        <img
-          src="/stockly-logo-negro.png"
-          alt="Stockly"
-          className="w-48 h-auto mb-4 mx-auto lg:mx-0 lg:ml-8"
-        />
-
-        {/* Slogan */}
-        <p className="text-black text-lg font-mediun text-center lg:text-left lg:-ml-16">
-          Tu aliado confiable para controlar stock y ventas
-        </p>
-      </div>
+      <Routes>
+        <Route index element={<DashboardHome />} />
+        <Route path="productos" element={<Productos />} />
+        <Route path="stock" element={<Stock />} />
+        <Route path="ventas" element={<Ventas />} />
+        <Route path="reportes" element={<Reportes />} />
+        <Route path="clientes" element={<Clientes />} />
+        <Route path="usuarios" element={<Usuarios />} />
+        <Route path="configuracion" element={<Configuracion />} />
+        <Route path="notificaciones" element={<Notificaciones />} />
+      </Routes>
     </Layout>
   );
 }

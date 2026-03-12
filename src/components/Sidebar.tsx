@@ -1,5 +1,16 @@
 import { Link } from "react-router-dom";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import {
+  CubeIcon,
+  ArchiveBoxIcon,
+  ShoppingCartIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  UserIcon,
+  Cog6ToothIcon,
+  BellIcon,
+} from "@heroicons/react/24/outline";
+import SidebarItem from "./SidebarItem";
 
 export default function Sidebar({
   isOpen,
@@ -8,9 +19,27 @@ export default function Sidebar({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const menuItems = [
+    { to: "/dashboard/productos", label: "Productos", icon: CubeIcon },
+    { to: "/dashboard/stock", label: "Stock", icon: ArchiveBoxIcon },
+    { to: "/dashboard/ventas", label: "Ventas", icon: ShoppingCartIcon },
+    { to: "/dashboard/reportes", label: "Reportes", icon: ChartBarIcon },
+    { to: "/dashboard/clientes", label: "Clientes", icon: UserGroupIcon },
+    { to: "/dashboard/usuarios", label: "Usuarios", icon: UserIcon },
+    {
+      to: "/dashboard/configuracion",
+      label: "Configuración",
+      icon: Cog6ToothIcon,
+    },
+    {
+      to: "/dashboard/notificaciones",
+      label: "Notificaciones",
+      icon: BellIcon,
+    },
+  ];
+
   return (
     <>
-      {/* Overlay en móviles */}
       {isOpen && (
         <div
           onClick={onClose}
@@ -19,10 +48,9 @@ export default function Sidebar({
       )}
 
       <aside
-        className={`fixed md:static top-0 left-0 h-screen w-64 bg-stockly-dark/80 backdrop-blur-sm text-white p-6 transform transition-transform duration-300 shadow-2xl  border-gray-700
-  ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+        className={`fixed md:static top-0 left-0 h-screen w-64 bg-stockly-dark/80 backdrop-blur-sm text-white p-6 transform transition-transform duration-300 shadow-2xl border-gray-700
+          ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
-        {/* Botón cerrar en móviles */}
         {isOpen && (
           <button
             onClick={onClose}
@@ -32,7 +60,6 @@ export default function Sidebar({
           </button>
         )}
 
-        {/* Logo solo en móviles */}
         <div className="flex justify-center mt-2 mb-4 md:hidden">
           <Link to="/dashboard">
             <img
@@ -43,56 +70,10 @@ export default function Sidebar({
           </Link>
         </div>
 
-        {/* Menú */}
         <nav className="flex flex-col gap-2">
-          <Link
-            to="/productos"
-            className="px-3 py-2 rounded hover:bg-stockly-gray transition text-sm md:text-base"
-          >
-            Productos
-          </Link>
-          <Link
-            to="/stock"
-            className="px-3 py-2 rounded hover:bg-stockly-gray transition text-sm md:text-base"
-          >
-            Stock
-          </Link>
-          <Link
-            to="/ventas"
-            className="px-3 py-2 rounded hover:bg-stockly-gray transition text-sm md:text-base"
-          >
-            Ventas
-          </Link>
-          <Link
-            to="/reportes"
-            className="px-3 py-2 rounded hover:bg-stockly-gray transition text-sm md:text-base"
-          >
-            Reportes
-          </Link>
-          <Link
-            to="/clientes"
-            className="px-3 py-2 rounded hover:bg-stockly-gray transition text-sm md:text-base"
-          >
-            Clientes
-          </Link>
-          <Link
-            to="/usuarios"
-            className="px-3 py-2 rounded hover:bg-stockly-gray transition text-sm md:text-base"
-          >
-            Usuarios
-          </Link>
-          <Link
-            to="/configuracion"
-            className="px-3 py-2 rounded hover:bg-stockly-gray transition text-sm md:text-base"
-          >
-            Configuración
-          </Link>
-          <Link
-            to="/notificaciones"
-            className="px-3 py-2 rounded hover:bg-stockly-gray transition text-sm md:text-base"
-          >
-            Notificaciones
-          </Link>
+          {menuItems.map((item) => (
+            <SidebarItem key={item.to} {...item} onClick={onClose} />
+          ))}
         </nav>
       </aside>
     </>

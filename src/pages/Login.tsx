@@ -1,48 +1,17 @@
-import { useState, useEffect } from "react";
-import { account } from "../services/appwrite";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
+  const { user, login, logout } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState<any>(null);
-  const navigate = useNavigate();
 
-  // 1. Verificar si ya hay sesión activa
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const currentUser = await account.get();
-        setUser(currentUser);
-        navigate("/dashboard"); // si ya está logueado, lo mandamos al dashboard
-      } catch {
-        // no hay sesión activa → se queda en login
-      }
-    };
-    checkSession();
-  }, []);
-
-  // 2. Login
-  const login = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await account.createEmailPasswordSession(email, password);
-      const currentUser = await account.get();
-      setUser(currentUser);
-      navigate("/dashboard");
+      await login(email, password);
     } catch (error) {
       console.error("Error en login:", error);
-    }
-  };
-
-  // 3. Logout
-  const logout = async () => {
-    try {
-      await account.deleteSession("current");
-      setUser(null);
-      navigate("/"); // vuelve al login
-    } catch (error) {
-      console.error("Error en logout:", error);
     }
   };
 
@@ -66,7 +35,7 @@ export default function Login() {
             </button>
           </div>
         ) : (
-          <form onSubmit={login} className="flex flex-col gap-4">
+          <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <input
               type="email"
               placeholder="Correo electrónico"
@@ -85,7 +54,7 @@ export default function Login() {
               type="submit"
               className="bg-stockly-dark text-white py-2 rounded hover:bg-stockly-muted transition"
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </button>
           </form>
         )}
