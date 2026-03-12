@@ -16,12 +16,19 @@ export default function AdminDashboard() {
 
   return (
     <Layout onLogout={logout}>
-      <h2 className="text-2xl font-bold text-stockly-dark mb-4">
-        Bienvenido al Dashboard
-      </h2>
-      <p className="text-stockly-muted">
-        Aquí verás un resumen de tu stock y ventas.
-      </p>
+     <div className="text-center lg:text-left">
+        {/* Logo */}
+        <img
+          src="/stockly-logo-negro.png"
+          alt="Stockly"
+          className="w-48 h-auto mb-4 mx-auto lg:mx-0 lg:ml-8"
+        />
+
+        {/* Slogan */}
+        <p className="text-black text-lg font-mediun text-center lg:text-left lg:-ml-16">
+          Tu aliado confiable para controlar stock y ventas
+        </p>
+      </div>
     </Layout>
   );
 }
