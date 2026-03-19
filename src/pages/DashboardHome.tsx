@@ -5,12 +5,12 @@ export default function DashboardHome() {
         <img
           src="/stockly-logo-stok.png"
           alt="Stockly"
-          className="max-h-[200px] w-auto mb-2 drop-shadow-lg lg:max-h-[240px]  xl:max-h-[300px] lg:-mb-8 lg:-ml-32 lg:-mt-16 -mt-16 md:-mt-32 xl:ml-16 xl:mt-2 2xl:max-h-[700px] 2xl:ml-96"
+          className="max-h-[200px] w-auto mb-2 drop-shadow-lg lg:max-h-[220px]  xl:max-h-[270px] lg:-mb-8 lg:-ml-12 lg:-mt-12 -mt-16 md:-mt-32 xl:ml-8 xl:-mt-12 2xl:max-h-[700px] 2xl:ml-96"
         />
-        <h2 className="text-s font-bold text-stockly-dark mb-2 lg:text-left lg:-ml-40 lg:text-2xl -mt-4 md:text-xl xl:text-3xl xl:ml-0 2xl:text-6xl 2xl:-mt-16 2xl:ml-80">
+        <h2 className="text-s font-bold text-stockly-dark mb-2 lg:text-left lg:-ml-24 lg:text-2xl -mt-4 md:text-xl xl:text-3xl xl:-ml-12 2xl:text-6xl 2xl:-mt-16 2xl:ml-80">
           Tu stock, siempre organizado
         </h2>
-        <p className="text-sm text-gray-600 italic lg:text-left lg:-ml-44 md:text-lg lg:text-xl xl:-ml-2 xl:text-2xl 2xl:text-5xl 2xl:ml-[310px] 2xl:mt-6">
+        <p className="text-sm text-gray-600 italic lg:text-left lg:-ml-[110px] md:text-lg lg:text-xl xl:-ml-14 xl:text-2xl 2xl:text-5xl 2xl:ml-[310px] 2xl:mt-6">
           La herramienta premium para tu negocio
         </p>
     </div>
